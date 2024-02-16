@@ -10,12 +10,16 @@
 void bubble_sort(int *array, size_t size)
 {
 	size_t i, j;
-	bool swapped;
+	int swapped;
+	int temp;
+
+	if (array == NULL || size < 2)
+		return;
 
 	/*Outer loop for the number of passes*/
 	for (i = 0; i < size - 1; i++)
 	{
-		swapped = false;
+		swapped = 0;
 
 		/*Inner loop for each pass, compares and swaps adjacent elements*/
 		for (j = 0; j < size - i - 1; j++)
@@ -24,14 +28,17 @@ void bubble_sort(int *array, size_t size)
 			if (array[j] > array[j + 1])
 			{
 				/*Swap elements*/
-				my_swap(&array[j], &array[j + 1]);
+				temp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
+
 				/* Set the flag to true as a swap was made */
-				swapped = true;
+				swapped = 1;
 				print_array(array, size);
 			}
 		}
 		/* If no swaps were made during a pass, the array is already sorted */
-		if (swapped == false)
+		if (swapped == 0)
 			break;
 	}
 }
